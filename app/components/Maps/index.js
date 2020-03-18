@@ -9,7 +9,7 @@ import {
     LONGITUDE_DELTA,
 } from '../../configs/Maps';
 
-/* Para Testing hasta que este el fetch*/ 
+/* Para Testing hasta hacer este el fetch sobre el backend*/ 
 import {mockRoutes} from '../../services/MockBussLineService';
 
 class Map extends React.Component {

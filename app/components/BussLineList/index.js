@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Image, FlatList } from 'react-native';
 import BussLineItem from './BussLineItem';
 import {mockBussLine} from '../../services/MockBussLineService';
+import { useNavigation } from '@react-navigation/native';
 
 class BussLineList extends React.Component {
   constructor(props){
@@ -11,7 +12,10 @@ class BussLineList extends React.Component {
     };
   }
   _handleOnPress = id => {
-    
+    // const navigation = useNavigation();
+    // navigation.navigate(screenName, {
+    //   id
+    // });    
   }
 
   _renderItem = ({item}) => {      
