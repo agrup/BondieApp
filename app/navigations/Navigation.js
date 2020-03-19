@@ -14,6 +14,7 @@ import MapsScreen from '../screens/Maps';
 import InfoScreen from '../screens/Info';
 
 import MyAcountScreen from '../screens/MyAcount';
+import { Button } from 'react-native';
 
 
 //const Tab = createMaterialBottomTabNavigator();
@@ -21,34 +22,48 @@ const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
 
-function BussLineStacks(){
+function optionStackScreens({ navigation }){
+    return(
+        {                            
+            headerLeft: () => (
+                <MaterialCommunityIcons        
+                    name='menu'
+                    size={30}                    
+                    onPress={() => navigation.toggleDrawer()}
+                />
+            ),
+          }
+    )
+}
+
+function BussLineStacks({ navigation }){
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Lineas Locales" component={BussLineScreen}/>
+            <Stack.Screen name="Lineas Locales" component={BussLineScreen} options={optionStackScreens}/>
         </Stack.Navigator>
     )
 }
 
-function HomeStacks(){
+function HomeStacks({ navigation }){
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Home" component={HomeScreen}/>
+            <Stack.Screen name="Home" component={HomeScreen} options={optionStackScreens}/>
         </Stack.Navigator>
     )
 }
 
-function MapsStacks(){
+function MapsStacks({ navigation }){
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Mapas" component={MapsScreen}/>
+            <Stack.Screen name="Mapas" component={MapsScreen} options={optionStackScreens}/>
         </Stack.Navigator>
     )
 }
 
-function InfoStacks(){
+function InfoStacks({ navigation }){
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Info" component={InfoScreen}/>
+            <Stack.Screen name="Info" component={InfoScreen} options={optionStackScreens}/>
         </Stack.Navigator>
     )
 }
@@ -56,7 +71,7 @@ function InfoStacks(){
 export default function navigation(){
     return(
         <NavigationContainer>
-            <Drawer.Navigator >
+            <Drawer.Navigator>
                 <Drawer.Screen
                     name = "Bienvenido"
                     component={HomeStacks}
@@ -64,8 +79,9 @@ export default function navigation(){
                         drawerLabel: 'Bienvenido',
                         drawerIcon: ({color , size}) => (
                             <MaterialCommunityIcons name="home" color={color} size={size}/>
-                        )
-                    }}
+                        ),
+                        
+                    }}                    
                 />  
                 <Drawer.Screen
                     name = "Lineas Locales"

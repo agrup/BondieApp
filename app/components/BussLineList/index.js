@@ -3,6 +3,7 @@ import { useState, useEffect} from "react";
 import { SafeAreaView, Text, Image, FlatList } from 'react-native';
 import BussLineItem from './BussLineItem';
 import {mockBussLine} from '../../services/MockBussLineService';
+import { useNavigation } from '@react-navigation/native';
 
 import { firebaseApp } from "../../utils/FireBase";
 import * as firebase from "firebase";
