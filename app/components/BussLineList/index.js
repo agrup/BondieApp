@@ -8,11 +8,15 @@ import { useNavigation } from '@react-navigation/native';
 import { firebaseApp } from "../../utils/FireBase";
 import * as firebase from "firebase";
 import "firebase/firestore";
-const db = firebase.firestore(firebaseApp);
+import "firebase/app";
+
+
+var db = firebaseApp.firestore();
 
 export default function BussLineList () {
 
   const [login, setLogin] = useState(null);
+  const [restaurants, setRestaurants] = useState([]);
   const [Busslines, setBussLines] = useState({});
   const [user, setUser] = useState(null);
   
@@ -23,16 +27,21 @@ export default function BussLineList () {
   }, []);
 
   useEffect(() => {
+
+    (async () => {    
       const resultBussLines = [];
-      db.collection("BussLines").get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            console.log(`${doc.id} => ${doc.data()}`);
-        });
-   });
+      await db.collection("BussLines").get()
+      .then(response => {
+        response.forEach(doc => {
+          let bussline = doc.data();
+          bussline.id = doc.id;
+          resultBussLines.push(bussline);
+          console.log(bussline);
+        })
+      });
 
-   setBussLines(mockBussLine)
-
+    setBussLines(resultBussLines)
+    })();
    }, []);
 
   return (
