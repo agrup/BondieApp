@@ -18,6 +18,18 @@ export default function BussLineList () {
   const [login, setLogin] = useState(null);
   const [Busslines, setBussLines] = useState({});
   const [user, setUser] = useState(null);
+
+  const [selected, setSelected] = useState(new Map());
+  const onSelect = React.useCallback(
+    id => {
+      const newSelected = new Map(selected);
+      newSelected.set(id, !selected.get(id));
+
+      setSelected(newSelected);
+    },
+    [selected],
+  );
+
   
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
@@ -44,17 +56,23 @@ export default function BussLineList () {
 
   return (
     
-    <View>  
+    <SafeAreaView>  
       
       <FlatList 
         data={Busslines}
         renderItem= { ({item}) => 
           <BussLineItem
+            id={item.id}
             name={item.name} 
             color={item.color}
-          />  
-      } />
-    </View>
+            onSelect={onSelect}
+            selected={!!selected.get(item.id)}
+          />          
+        } 
+        keyExtractor={item => item.id}
+        extraData={selected}  
+      />
+    </SafeAreaView>
   );
 }
 ;

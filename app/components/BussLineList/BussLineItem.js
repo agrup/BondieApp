@@ -3,31 +3,51 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { color } from 'react-native-reanimated';
 
-export default function BussLineList (props) {
-    
-  const {color,name} = props;
-  
+function BussLineItem({ id, name, color, selected, onSelect }) {
   return(
-      <TouchableOpacity>
-        <View style={[styles.bussLineItem,{backgroundColor: color}]}>
-            <MaterialCommunityIcons name='bus' color="black" size={25}/>
-            <Text style={styles.name}>{name}</Text>        
+    <TouchableOpacity
+      onPress={() => onSelect(id)}
+    >
+      <View style={[styles.bussLineItem,{backgroundColor: color}]}>
+
+        <View  style={styles.leftSide}>
+          <MaterialCommunityIcons name='bus' color="black" size={25}/>
+          <Text style={styles.name}>{name}</Text>
         </View>
-      </TouchableOpacity>
-    )  
+
+        <View  style={styles.rightSide}>
+          <MaterialCommunityIcons name={selected ? 'eye-outline' : 'eye-off-outline'} color="black" size={30}/>
+        </View>                  
+
+      </View>
+    </TouchableOpacity>
+  );
 }
 
 const styles = StyleSheet.create({
   bussLineItem: {
     flexDirection: "row",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#FFFFFF",    
     borderBottomColor: "#AAAAAA",
     borderBottomWidth: 2,
     padding: 5,
-    height: 60,    
+    height: 60
+  },
+  leftSide: {
+    flexDirection: "row",
+    justifyContent:'flex-start',
+    width: '70%',    
+  },
+  rightSide: {
+    flexDirection: "row",
+    marginRight: '2%',    
+    justifyContent:'flex-end',
+    width: '25%',
   },
   name: {
-    marginLeft: 20,
-  }
+    marginLeft: 20
+    
+  },
+  
 });
 
