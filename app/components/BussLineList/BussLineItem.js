@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import { color } from 'react-native-reanimated';
+//import { color } from 'react-native-reanimated';
 
-function BussLineItem({ id, name, color, selected, onSelect }) {
+export default function BussLineItem({ id, name, color, selected, onSelect }) {
   return(
     <TouchableOpacity
       onPress={() => onSelect(id)}
