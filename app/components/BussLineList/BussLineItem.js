@@ -2,11 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 //import { color } from 'react-native-reanimated';
+import { useNavigation } from '@react-navigation/native';
 
 export default function BussLineItem({ id, name, color, selected, onSelect }) {
+  const navigation = useNavigation();
   return(
     <TouchableOpacity
-      onPress={() => onSelect(id)}
+      onPress={() => {onSelect(id); navigation.navigate("Lugares")}}
     >
       <View style={[styles.bussLineItem,{backgroundColor: color}]}>
 
@@ -23,6 +25,8 @@ export default function BussLineItem({ id, name, color, selected, onSelect }) {
     </TouchableOpacity>
   );
 }
+
+
 
 const styles = StyleSheet.create({
   bussLineItem: {
