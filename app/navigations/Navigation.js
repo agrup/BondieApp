@@ -28,8 +28,9 @@ function optionStackScreens({ navigation }){
             headerLeft: () => (
                 <MaterialCommunityIcons        
                     name='menu'
-                    size={30}                    
+                    size={40}                                        
                     onPress={() => navigation.toggleDrawer()}
+                    style={ {marginLeft: 2} }
                 />
             ),
           }

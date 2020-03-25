@@ -1,12 +1,7 @@
-import React, {useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
-
+import React, { useContext } from 'react';
+import { StyleSheet } from 'react-native';
 import MapView, { Polyline } from 'react-native-maps';
-import { firebaseApp } from "../../utils/FireBase";
-import * as firebase from "firebase";
-import "firebase/firestore";
-import "firebase/app";
-
+import { BusslineContext } from "../../context";
 
 import {
     LATITUDE,
@@ -15,63 +10,34 @@ import {
     LONGITUDE_DELTA,
 } from '../../configs/Maps';
 
-/* Para Testing hasta hacer este el fetch sobre el backend*/ 
-// import {mockRoutes} from '../../services/MockBussLineService';
-
-var db = firebaseApp.firestore();
-
 export default function Map(){
- 
-  const [routes, setRoutes] = useState([])
+  const bussLineContext = useContext(BusslineContext);
+  const { selectedBusslines } = bussLineContext;
 
-  useEffect(() => {
-    (async () => {    
-      const resultBussLines = [];
-      await db.collection("BussRoutes").get()
-      .then(response => {
-        response.forEach(doc => {
-          let bussline = doc.data();
-          bussline.id = doc.id;
-          resultBussLines.push(bussline);
-          //console.log(bussline);
-        })
-      });
+  const renderRoute = ({coordinates, name, color}) => {
+      return (
+          <Polyline
+          key={name}
+          coordinates={coordinates}
+          strokeColor={color}
+          strokeWidth={3}
+          />
+      );
+  }
 
-      setRoutes(resultBussLines)
-    })();
-   }, []);
-
-
-
-  function renderRoute ({coordinates, name, color}) {
-        return (
-            <Polyline
-            key={name}
-            coordinates={coordinates}
-            strokeColor={color}
-            strokeWidth={3}
-            />
-        );
-    }
-
-    return (
-
-      <MapView
-        style={ styles.map }
-
-        initialRegion={{
-          latitude: LATITUDE,
-          longitude: LONGITUDE,
-          latitudeDelta: LATITUDE_DELTA,
-          longitudeDelta: LONGITUDE_DELTA,
-        }}
-      >
-        {routes.map(item => renderRoute(item))}
-
-      </MapView>
-
-    );
-
+  return (
+    <MapView
+      style={ styles.map }
+      initialRegion={{
+        latitude: LATITUDE,
+        longitude: LONGITUDE,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA,
+      }}
+    >
+      {selectedBusslines.map(item => renderRoute(item))}
+    </MapView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -92,5 +58,3 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
 });
-
-//export default Map;
