@@ -1,7 +1,13 @@
-import React from 'react';
+import React, {useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import MapView, { Polyline } from 'react-native-maps';
+import { firebaseApp } from "../../utils/FireBase";
+import * as firebase from "firebase";
+import "firebase/firestore";
+import "firebase/app";
+
+
 import {
     LATITUDE,
     LONGITUDE,
@@ -10,25 +16,34 @@ import {
 } from '../../configs/Maps';
 
 /* Para Testing hasta hacer este el fetch sobre el backend*/ 
-import {mockRoutes} from '../../services/MockBussLineService';
+// import {mockRoutes} from '../../services/MockBussLineService';
 
-class Map extends React.Component {
+var db = firebaseApp.firestore();
 
-  constructor(props) {
-    super(props);
-    this.state = {
-        routes: []
-    }
-  }
-  
-  componentDidMount(){
-      /* TODO: service fetchRoutes*/
-      this.setState({
-          routes: mockRoutes
-        });
-  }
+export default function Map(){
+ 
+  const [routes, setRoutes] = useState([])
 
-  renderRoute ({coordinates, name, color}) {
+  useEffect(() => {
+    (async () => {    
+      const resultBussLines = [];
+      await db.collection("BussRoutes").get()
+      .then(response => {
+        response.forEach(doc => {
+          let bussline = doc.data();
+          bussline.id = doc.id;
+          resultBussLines.push(bussline);
+          //console.log(bussline);
+        })
+      });
+
+      setRoutes(resultBussLines)
+    })();
+   }, []);
+
+
+
+  function renderRoute ({coordinates, name, color}) {
         return (
             <Polyline
             key={name}
@@ -39,7 +54,6 @@ class Map extends React.Component {
         );
     }
 
-  render() {
     return (
 
       <MapView
@@ -52,12 +66,11 @@ class Map extends React.Component {
           longitudeDelta: LONGITUDE_DELTA,
         }}
       >
-        {this.state.routes.map(this.renderRoute)}
+        {routes.map(item => renderRoute(item))}
 
       </MapView>
 
     );
-  }
 
 }
 
@@ -80,4 +93,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Map;
+//export default Map;

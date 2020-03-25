@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { useState, useEffect} from "react";
-import { SafeAreaView, Text, Image, FlatList } from 'react-native';
+import React, { useState, useEffect } from 'react';
+//import  from "react";
+import { SafeAreaView,View , Text, Image, FlatList } from 'react-native';
 import BussLineItem from './BussLineItem';
 import {mockBussLine} from '../../services/MockBussLineService';
 import { useNavigation } from '@react-navigation/native';
@@ -16,7 +16,6 @@ var db = firebaseApp.firestore();
 export default function BussLineList () {
 
   const [login, setLogin] = useState(null);
-  const [restaurants, setRestaurants] = useState([]);
   const [Busslines, setBussLines] = useState({});
   const [user, setUser] = useState(null);
   
@@ -27,16 +26,15 @@ export default function BussLineList () {
   }, []);
 
   useEffect(() => {
-
     (async () => {    
       const resultBussLines = [];
-      await db.collection("BussLines").get()
+      await db.collection("BussRoutes").get()
       .then(response => {
         response.forEach(doc => {
           let bussline = doc.data();
           bussline.id = doc.id;
           resultBussLines.push(bussline);
-          console.log(bussline);
+          //console.log(bussline);
         })
       });
 
@@ -46,7 +44,7 @@ export default function BussLineList () {
 
   return (
     
-    <SafeAreaView>  
+    <View>  
       
       <FlatList 
         data={Busslines}
@@ -56,7 +54,7 @@ export default function BussLineList () {
             color={item.color}
           />  
       } />
-    </SafeAreaView>
+    </View>
   );
 }
 ;

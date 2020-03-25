@@ -1,18 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { color } from 'react-native-reanimated';
 
-class BussLineItem extends React.Component {  
-  render(){
-    return(
+export default function BussLineList (props) {
+    
+  const {color,name} = props;
+  
+  return(
       <TouchableOpacity>
-        <View style={[styles.bussLineItem,{backgroundColor: this.props.color}]}>
+        <View style={[styles.bussLineItem,{backgroundColor: color}]}>
             <MaterialCommunityIcons name='bus' color="black" size={25}/>
-            <Text style={styles.name}>{this.props.name}</Text>        
+            <Text style={styles.name}>{name}</Text>        
         </View>
       </TouchableOpacity>
-    );
-  }
+    )  
 }
 
 const styles = StyleSheet.create({
@@ -29,4 +31,3 @@ const styles = StyleSheet.create({
   }
 });
 
-export default BussLineItem;
