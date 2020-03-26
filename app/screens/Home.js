@@ -1,10 +1,21 @@
 import React from 'react';
-import { View,Text } from 'react-native';
+import { View,Text,StyleSheet,Image } from 'react-native';
+//import  MainIcon from '../components/Reources/icon' 
+import styles from '../styles/app'
+
 
 export default  function Home(){
     return (
-        <View>
-            <Text>Home</Text>
+        <View style={styles.screen}>
+            <Image
+                style={styles.logo}
+                source = {require('../assets/logo.png')}
+                resizeMode="contain"
+            />
+            <Text style={styles.nameapp} > Bondie APP</Text>
+            <Text style={styles.description}>Tu app para viajar en Lujan</Text>
+            
         </View>
     )
 }
+

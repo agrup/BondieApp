@@ -48,7 +48,7 @@ function BussLineStacks({ navigation }){
 function HomeStacks({ navigation }){
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Home" component={HomeScreen} options={optionStackScreens}/>
+            <Stack.Screen name="Bondie App" component={HomeScreen} options={optionStackScreens}/>
         </Stack.Navigator>
     )
 }
