@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         height: 50,
         color: '#FF0042',
         fontSize: 24,
-        fontFamily: 'lucida grande',
+        fontFamily: 'comComfortaa-VariableFont_wghtforta',
         textAlign: 'center',
         //fontFamily: "Cochin"
 
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     textadv: {
         color: '#FF0042',
         fontSize: 24,
-        fontFamily: 'lucida grande',
+        fontFamily: 'Comfortaa-VariableFont_wght',
         textAlign: 'center',
     },
     description:{
@@ -51,7 +51,23 @@ const styles = StyleSheet.create({
     stackheader:{
         backgroundColor: '#FF0042',
 
+    },
+    info:{
+        color: '#FF0042',
+        textAlign:'center',
+        fontFamily: 'Comfortaa-VariableFont_wght',
+        fontSize:24,
+    },
+    infoScreen:{
+        height:"20%",
+        backgroundColor:'#000000'
+    },
+    infoDescription:{
+        margin: 20,
+        color: '#FF0042',
+                
     }
+
 
 })
 export default styles

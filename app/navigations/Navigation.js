@@ -35,6 +35,7 @@ function optionStackScreens({ navigation }){
                 />
             ),
             headerStyle: {
+                
                 backgroundColor: '#FF0042',
                 borderWidth: 2,
                 borderBottomColor:'#000000'

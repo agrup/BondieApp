@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import { YellowBox } from 'react-native';
 
-
+//Solucion provisori para evitar los warnings amarillos
 YellowBox.ignoreWarnings(['Setting a timer']);
 
 import PropTypes from "prop-types";

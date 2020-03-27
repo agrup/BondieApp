@@ -1,10 +1,23 @@
 import React from 'react';
 import { View,Text } from 'react-native';
+import styles from '../styles/app'
+import Adv from '../components/Adv'
+
 
 export default  function Info(){
     return (
-        <View>
-            <Text>Info</Text>
+        <View >
+            <View style={styles.infoScreen}>
+                <Text style={styles.info} > Informacion</Text>
+            
+            
+
+            </View>
+            <Text style={styles.infoDescription}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            
+            </Text>
         </View>
     )
 }
