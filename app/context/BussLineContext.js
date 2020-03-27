@@ -7,7 +7,9 @@ import "firebase/app";
 
 export const Context = createContext({});
 
-var db = firebaseApp.firestore();
+  var db = firebaseApp.firestore();
+
+
 
 export const Provider = props => {
   // Initial values are obtained from the props
@@ -16,21 +18,30 @@ export const Provider = props => {
   const [busslines, setBussLines] = useState({});  
 
   useEffect(() => {
+    
+      
+
     (async () => {    
       const resultBussLines = [];
-      await db.collection("BussRoutes").get()
-      .then(response => {
-        response.forEach(doc => {
-          let bussline = doc.data();
-          bussline.id = doc.id;
-          //bussline.selected = false;  //por el momento se estan manteniendo por separado las lineas seleccionadas
-          resultBussLines.push(bussline);
-        })
-      });
+        db.collection("BussRoutes").get()
+        .then(response => {
+          response.forEach(doc => {
+            let bussline = doc.data();
+            bussline.id = doc.id;
+            //bussline.selected = false;  //por el momento se estan manteniendo por separado las lineas seleccionadas
+            resultBussLines.push(bussline);
+          })
+        });
+
 
     setBussLines(resultBussLines)
     })();
-   }, []);
+
+    }, [busslines]);
+
+
+   
+
 
   //tengo en el estado los pares id => seleccionado/no_seleccionado
   const [selected, setSelected] = useState(new Map());

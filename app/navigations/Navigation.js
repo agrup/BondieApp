@@ -16,6 +16,7 @@ import InfoScreen from '../screens/Info';
 import MyAcountScreen from '../screens/MyAcount';
 import { Button } from 'react-native';
 
+import styles from '../styles/app';
 
 //const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -30,9 +31,14 @@ function optionStackScreens({ navigation }){
                     name='menu'
                     size={40}                                        
                     onPress={() => navigation.toggleDrawer()}
-                    style={ {marginLeft: 2} }
+                    style={ styles.stackIcon }
                 />
             ),
+            headerStyle: {
+                backgroundColor: '#FF0042',
+                borderWidth: 2,
+                borderBottomColor:'#000000'
+              }
           }
     )
 }
@@ -56,14 +62,14 @@ function HomeStacks({ navigation }){
 function MapsStacks({ navigation }){
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Mapas" component={MapsScreen} options={optionStackScreens}/>
+            <Stack.Screen name="Lugares" component={MapsScreen} options={optionStackScreens}/>
         </Stack.Navigator>
     )
 }
 
 function InfoStacks({ navigation }){
     return (
-        <Stack.Navigator>
+        <Stack.Navigator >
             <Stack.Screen name="Info" component={InfoScreen} options={optionStackScreens}/>
         </Stack.Navigator>
     )

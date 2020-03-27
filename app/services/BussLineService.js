@@ -1,22 +1,22 @@
-const API_STEM = "http://localhost:8000/api/";
+// const API_STEM = "http://localhost:8000/api/";
 
-function getUrl(lat, lon){
-	let url = `${API_STEM}`;	
-	return url;
-}
+// function getUrl(lat, lon){
+// 	let url = `${API_STEM}`;	
+// 	return url;
+// }
 
-function fetchBussLines(){
+// function fetchBussLines(){
 
-	return fetch(getUrl())
-		.then( response => response.json())
-		.then( responseJSON => {
-			return {
-				responseJSON;
-			}			
-		})
-		.catch( error => {
-			console.error(error);
-		});
-}
+// 	return fetch(getUrl())
+// 		.then( response => response.json())
+// 		.then( responseJSON => {
+// 			return {
+// 				responseJSON;
+// 			}			
+// 		})
+// 		.catch( error => {
+// 			console.error(error);
+// 		});
+// }
 
-export default { fetchBussLines: fetchBussLines };
+// export default { fetchBussLines: fetchBussLines };

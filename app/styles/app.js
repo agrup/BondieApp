@@ -42,6 +42,15 @@ const styles = StyleSheet.create({
         height: 300,
         color: '#FF0042',
         textAlign: 'center',
+    },
+    stackIcon:{
+        color: '#000000',
+        marginLeft: 2,
+        backgroundColor: '#FF0042',
+    },
+    stackheader:{
+        backgroundColor: '#FF0042',
+
     }
 
 })
