@@ -1,5 +1,7 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect} from "react";
 import { YellowBox } from 'react-native';
+import NetInfo from "@react-native-community/netinfo";
+//import {useNetInfo} from "@react-native-community/netinfo";
 
 //Solucion provisori para evitar los warnings amarillos
 YellowBox.ignoreWarnings(['Setting a timer']);
@@ -19,22 +21,32 @@ export const Provider = props => {
   const { children } = props;
 
   const [busslines, setBussLines] = useState({});  
+  //const netInfo = useNetInfo();
 
   useEffect(() => {
-    (async () => {    
-      const resultBussLines = [];
-      await db.collection("BussRoutes").get()
-      .then(response => {
-        response.forEach(doc => {
-          let bussline = doc.data();
-          bussline.id = doc.id;
-          //bussline.selected = false;  //por el momento se estan manteniendo por separado las lineas seleccionadas
-          resultBussLines.push(bussline);
-        })
-      });
+    NetInfo.fetch().then( state => {
+      if(state.isConnected){
+    
+        (async () => {    
+          const resultBussLines = [];
+          await db.collection("BussRoutes").get()
+          .then(response => {
+            response.forEach(doc => {
+              let bussline = doc.data();
+              bussline.id = doc.id;
+              //bussline.selected = false;  //por el momento se estan manteniendo por separado las lineas seleccionadas
+              resultBussLines.push(bussline);
+            })
+          });
+    
+        setBussLines(resultBussLines)
+        })();    
 
-    setBussLines(resultBussLines)
-    })();
+      }else{
+        console.log('no hay conexion');
+      }
+    });
+    
    }, []);
 
   //tengo en el estado los pares id => seleccionado/no_seleccionado
