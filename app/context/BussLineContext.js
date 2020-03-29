@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect} from "react";
 import { YellowBox } from 'react-native';
 import NetInfo from "@react-native-community/netinfo";
-//import {useNetInfo} from "@react-native-community/netinfo";
 
 //Solucion provisori para evitar los warnings amarillos
 YellowBox.ignoreWarnings(['Setting a timer']);
@@ -23,9 +22,9 @@ export const Provider = props => {
 
   const [busslines, setBussLines] = useState({});
   
-    useEffect(() => {
+  async function fetchRoutes(){
        const resultBussLines = [];
-        database.ref('BussRoutes/').once('value')
+        await database.ref('BussRoutes/').once('value')
         .then( function (snapshot) {
           snapshot.val().forEach(bussRoute => {
             console.log(bussRoute.id);
@@ -35,38 +34,53 @@ export const Provider = props => {
           })
 
 
-      }).catch;
+      });
 
       setBussLines(resultBussLines)
-    }, []);
+    }//, []);
 
-  // useEffect(() => {
-  //   NetInfo.fetch().then( state => {
-  //     if(state.isConnected){
-    
-  //       (async () => {    
-  //         const resultBussLines = [];
-  //         await db.collection("BussRoutes").get()
-  //         .then(response => {
-  //           response.forEach(doc => {
-  //             console.log(doc.data());
-  //             let bussline = doc.data();
-  //             bussline.id = doc.id;
-  //             //bussline.selected = false;  //por el momento se estan manteniendo por separado las lineas seleccionadas
-  //             resultBussLines.push(bussline);
-  //           })
-  //         });
-  //         console.log("hola")
-  //       setBussLines(resultBussLines)
-  //       })();
+//  const [busslines, setBussLines] = useState({});  
 
-  //     }else{
-  //       alert("Sin conexion a internet")
-  //       console.log('no hay conexion');
-  //     }
-  //   });
+  // async function fetchRoutes(){
+  //   const resultBussLines = [];
+  //   await db.collection("BussRoutes").get()
+  //     .then(response => {
+  //       response.forEach(doc => {
+  //         let bussline = doc.data();
+  //         bussline.id = doc.id;
+  //         //bussline.selected = false;  //por el momento se estan manteniendo por separado las lineas seleccionadas
+  //         resultBussLines.push(bussline);
+  //       })
+  //     });
+
+  //   setBussLines(resultBussLines)    
+  // }
+
+  useEffect(() => {
+    NetInfo.fetch().then( state => {
+      if(state.isConnected){    
+        fetchRoutes();
+      }else{
+        console.log('no hay conexion');
+      }
+    });
     
-  //  }, []);
+   }, []);
+
+   const unsubscribe = NetInfo.addEventListener(state => {
+    console.log("Connection type", state.type);
+    console.log("Is connected?", state.isConnected);
+
+    //si no hay lineas cargadas y hay internet vuelvo a consultar
+    console.log('tamaño de bussline '+Object.keys(busslines).length);
+    if(state.isConnected && Object.keys(busslines).length==0){
+      fetchRoutes();
+    }
+    
+  });
+
+  // Unsubscribe
+  //unsubscribe();
 
 
   //tengo en el estado los pares id => seleccionado/no_seleccionado

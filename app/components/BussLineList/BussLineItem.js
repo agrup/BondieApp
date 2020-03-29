@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function BussLineItem({ id, name, color, selected, onSelect }) {
   const navigation = useNavigation();
+  
   return(
     <TouchableOpacity
       onPress={() => {onSelect(id); navigation.navigate("Lugares")}}
