@@ -6,11 +6,10 @@ import { BusslineContext } from "../../context";
 export default function BussLineList () {  
   const busslineContext = useContext(BusslineContext);
   const { busslines, selectBussline, selected } = busslineContext;    
-  
   return (
     <SafeAreaView>        
       <FlatList 
-        data={busslines}        
+        data={busslines}
         renderItem= { ({item}) => 
           <BussLineItem
             id={item.id} 

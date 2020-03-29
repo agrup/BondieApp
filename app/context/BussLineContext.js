@@ -15,39 +15,59 @@ import "firebase/app";
 export const Context = createContext({});
 
 var db = firebaseApp.firestore();
+var database = firebaseApp.database();
 
 export const Provider = props => {
   // Initial values are obtained from the props
   const { children } = props;
 
-  const [busslines, setBussLines] = useState({});  
-  //const netInfo = useNetInfo();
+  const [busslines, setBussLines] = useState({});
+  
+    useEffect(() => {
+       const resultBussLines = [];
+        database.ref('BussRoutes/').once('value')
+        .then( function (snapshot) {
+          snapshot.val().forEach(bussRoute => {
+            console.log(bussRoute.id);
+            let bussline = bussRoute.data;
+            bussline.id = bussRoute.id;
+            resultBussLines.push(bussline);
+          })
 
-  useEffect(() => {
-    NetInfo.fetch().then( state => {
-      if(state.isConnected){
-    
-        (async () => {    
-          const resultBussLines = [];
-          await db.collection("BussRoutes").get()
-          .then(response => {
-            response.forEach(doc => {
-              let bussline = doc.data();
-              bussline.id = doc.id;
-              //bussline.selected = false;  //por el momento se estan manteniendo por separado las lineas seleccionadas
-              resultBussLines.push(bussline);
-            })
-          });
-    
-        setBussLines(resultBussLines)
-        })();    
 
-      }else{
-        console.log('no hay conexion');
-      }
-    });
+      }).catch;
+
+      setBussLines(resultBussLines)
+    }, []);
+
+  // useEffect(() => {
+  //   NetInfo.fetch().then( state => {
+  //     if(state.isConnected){
     
-   }, []);
+  //       (async () => {    
+  //         const resultBussLines = [];
+  //         await db.collection("BussRoutes").get()
+  //         .then(response => {
+  //           response.forEach(doc => {
+  //             console.log(doc.data());
+  //             let bussline = doc.data();
+  //             bussline.id = doc.id;
+  //             //bussline.selected = false;  //por el momento se estan manteniendo por separado las lineas seleccionadas
+  //             resultBussLines.push(bussline);
+  //           })
+  //         });
+  //         console.log("hola")
+  //       setBussLines(resultBussLines)
+  //       })();
+
+  //     }else{
+  //       alert("Sin conexion a internet")
+  //       console.log('no hay conexion');
+  //     }
+  //   });
+    
+  //  }, []);
+
 
   //tengo en el estado los pares id => seleccionado/no_seleccionado
   const [selected, setSelected] = useState(new Map());
