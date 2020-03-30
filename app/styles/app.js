@@ -9,7 +9,9 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
     },
     screen:{
+        flexDirection: 'column',
         backgroundColor: '#000000',
+        height: "100%",
     },
     logo: {
       width: "100%",

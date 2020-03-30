@@ -86,6 +86,12 @@ export const Provider = props => {
   //tengo en el estado los pares id => seleccionado/no_seleccionado
   const [selected, setSelected] = useState(new Map());
 
+  const goSelectBussline = id => {
+    const newSelected = new Map(selected);
+    newSelected.set(id, true);
+
+    setSelected(newSelected); 
+  }
   //funcion que se ejecuta al seleccionar
   const selectBussline = id => {
     const newSelected = new Map(selected);
@@ -112,7 +118,8 @@ export const Provider = props => {
     
     if(selected.size>0){
       busslines.forEach(line => {
-        if(selected.get(line.id)){          
+        if(selected.get(line.id)){    
+                
           resultBussLines.push(line);    
         }      
       })
@@ -126,6 +133,7 @@ export const Provider = props => {
     selectBussline,
     selectedBusslines: getSelectedBusslines(),
     selected,    
+    goSelectBussline
   };
 
   // pass the value in provider and return
