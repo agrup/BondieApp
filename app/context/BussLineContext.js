@@ -7,14 +7,23 @@ YellowBox.ignoreWarnings(['Setting a timer']);
 
 import PropTypes from "prop-types";
 
-import { firebaseApp } from "../utils/FireBase";
+import { firebaseApp, CACHE_SIZE_UNLIMITED } from "../utils/FireBase";
 import "firebase/firestore";
 import "firebase/app";
+
 
 export const Context = createContext({});
 
 var db = firebaseApp.firestore();
 var database = firebaseApp.database();
+
+db.settings({
+  cacheSizeBytes: CACHE_SIZE_UNLIMITED
+});
+
+db.enablePersistence().catch(function(err) {
+  console.log(err);
+});
 
 export const Provider = props => {
   // Initial values are obtained from the props
@@ -24,7 +33,7 @@ export const Provider = props => {
   
   async function fetchRoutes(){
        const resultBussLines = [];
-        await database.ref('BussRoutes/').once('value')
+        /*await database.ref('BussRoutes/').once('value')
         .then( function (snapshot) {
           snapshot.val().forEach(bussRoute => {
             console.log(bussRoute.id);
@@ -32,8 +41,14 @@ export const Provider = props => {
             bussline.id = bussRoute.id;
             resultBussLines.push(bussline);
           })
-
-
+          */
+         await db.collection("BussRoutes").get()
+         .then(response => {
+           response.forEach(doc => {
+             let bussline = doc.data();
+             bussline.id = doc.id;
+             resultBussLines.push(bussline);
+           })
       });
 
       setBussLines(resultBussLines)
