@@ -7,7 +7,6 @@ export default function Scheduler({scheduler}){
    const tableHead = []
    const tableroutes = []
     Object.values(scheduler).forEach(function(key){
-      console.log(key)
       var {show,horas} = key
       console.log(horas)
       tableHead.push(show)
@@ -22,8 +21,8 @@ export default function Scheduler({scheduler}){
     }
       return (
         <View style={styles.container}>
-          <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
-            <Row data={data.HeadTable} style={styles.head} textStyle={styles.text}/>
+          <Table borderStyle={{borderWidth: 2, borderColor: '#fff'}}>
+            <Row data={data.HeadTable} style={styles.head} textStyle={styles.textheader}/>
             <Cols data={data.DataTable} textStyle={styles.text}/>
           </Table>
         </View>
@@ -31,7 +30,12 @@ export default function Scheduler({scheduler}){
     }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
-    head: { height: 40, backgroundColor: '#f1f8ff' },
-    text: { margin: 6 }
+    container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#000000' },
+    head: { height: 40, backgroundColor: '#FF1153' },
+    text: { margin: 6, color:'#FF0042'},
+    textheader:{color:'#000000',
+    fontWeight: "bold",
+    textAlign:'center',
+    fontFamily: 'Comfortaa-VariableFont_wght',
+    }
   });
