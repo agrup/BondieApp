@@ -8,8 +8,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 export default function BussLineList () {  
   const busslineContext = useContext(BusslineContext);
   const { busslines, selectBussline, selected,goSelectBussline } = busslineContext;   
- 
-
+  
   return (
 
         <FlatList 
@@ -19,6 +18,7 @@ export default function BussLineList () {
               id={item.id} 
               name={item.name} 
               color={item.color}
+              schedulers={item.horarios}
               selected={selected.get(item.id)}
               onSelect={selectBussline}
               goSelect={goSelectBussline}

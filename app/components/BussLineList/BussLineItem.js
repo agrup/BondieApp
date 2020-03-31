@@ -1,21 +1,24 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity,Hr } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 //import { color } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 import Scheduler from '../schedule/scheduleItem'
 
 
-export default function BussLineItem({ id, name, color, selected, onSelect,goSelect }) {
+export default function BussLineItem({ id, name, color,schedulers, selected, onSelect,goSelect }) {
   const navigation = useNavigation();
   const [isSelected,setIsSelected] = useState(false) 
   return(
     <View>
-      <View style={[styles.bussLineItem,{backgroundColor: color}]}>
+      <View style={[styles.bussLineItem,{borderColor: color}]}>
 
         <View  style={styles.leftSide}>
-          <MaterialCommunityIcons name='bus' color="black" size={40}/>
-          <Text style={styles.name}>{name}</Text>
+          <MaterialCommunityIcons name='bus' color={color} size={40}/>
+          <View>
+            <Text style={[styles.name,{color: color}]}>{name}</Text>
+            <View style = {[styles.lineStyle,{borderColor:color}]} />
+          </View>
         </View>
 
         <View style={styles.rightSide}>
@@ -35,7 +38,7 @@ export default function BussLineItem({ id, name, color, selected, onSelect,goSel
           <Maps />
         </TouchableOpacity>
       </View>
-      {isSelected ? <Scheduler/> : null}
+      {isSelected ? <Scheduler scheduler={schedulers} /> : null}
     </View>
   );
 }
@@ -85,24 +88,23 @@ const ShowHideComponent = (isSelected,setIsSelected) => {
   }
 };
 
+
+
 const styles = StyleSheet.create({
   bussLineItem: {
     flexDirection: "row",
     backgroundColor: "#FFFFFF",    
-    borderBottomColor: "#AAAAAA",
-    borderBottomWidth: 2,
-    padding: 5,
-    height: 100,
-    borderWidth: 4,
-    borderColor: "#20232a",
+    //borderBottomColor: "#AAAAAA",
+    //borderBottomWidth: 10,
+    padding: 3,
+    height: 80,
+    borderWidth: 10,
+    //borderColor: "#20232a",
     borderRadius: 6,
     //flexWrap:"nowrap"
   },
   leftSide: {
-    marginLeft: 10,
-    // marginTop: 10,
-    // paddingVertical: 12,
-    // paddingHorizontal:12,
+    marginLeft: "2%",
     alignItems: 'center',
     flexDirection: "row",
     justifyContent:'flex-start',
@@ -124,20 +126,25 @@ const styles = StyleSheet.create({
     marginTop: 0,
     alignContent: 'center',
     paddingHorizontal:12,
-    borderWidth: 4,
-    borderColor: "#20232a",
-    borderRadius: 10,
-    backgroundColor: "yellow",
     color: "#20232a",
   },
   button:{
-    marginTop: 8,
-    paddingVertical: 12,
+    marginTop: "8%",
+    paddingVertical: "12%",
     paddingHorizontal:8,
     borderWidth: 2,
     borderColor: "#20232a",
     borderRadius: 4,
     backgroundColor: "#CCCCCC",
+  },
+  lineStyle:{
+  borderWidth: 4,
+  margin:1,
+  borderBottomRightRadius: 16,
+  borderBottomLeftRadius: 16,
+  alignSelf: 'flex-end',
+  width: "70%",
+
   }
   
 });
