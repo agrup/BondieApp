@@ -15,15 +15,26 @@ export default function Map(){
   const { selectedBusslines } = bussLineContext;
 
   const renderRoute = ({coordinates, name, color}) => {
-      return (
-          <Polyline
-          key={name}
-          coordinates={coordinates}
-          strokeColor={color}
-          strokeWidth={3}
-          />
-      );
-  }
+    //console.log(coordinates[0]);
+    const coordinatesPoliline = [];
+    coordinates.map(geoPoint => {
+      coordinatesPoliline.push({
+        latitude : geoPoint._latitude,
+        longitude : geoPoint._longitude,
+      });
+    })
+    return (
+      (coordinatesPoliline) ?
+        <Polyline
+        key={name}
+        coordinates={coordinatesPoliline}
+        strokeColor={color}
+        strokeWidth={3}
+        />
+      : null
+    );
+}
+
 
   return (
     <MapView
