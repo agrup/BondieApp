@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "344724584812",
+    "firebase_url": "https://arduinohome-1e847.firebaseio.com",
+    "project_id": "arduinohome-1e847",
+    "storage_bucket": "arduinohome-1e847.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344724584812:android:00977675885ef67f715b49",
+        "android_client_info": {
+          "package_name": "com.bondie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "344724584812-101i3joka0fmo1bm3o26jlv6n83lg59q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bondie",
+            "certificate_hash": "ece61af5e63d39eaccd4954907197804cfbda200"
+          }
+        },
+        {
+          "client_id": "344724584812-a4tspi90qqtessv7atlromvqvt6gjh7g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_iA274kGqz9vgpZSQyWLT38vRn35x9wE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "344724584812-a4tspi90qqtessv7atlromvqvt6gjh7g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
