@@ -18,10 +18,10 @@ export default function Adv() {
     onAdLoaded={() => {
       console.log('Advert loaded');
     }}
-    onAdFailedToLoad={(error) => {
-      alert('Error de Conexion')
-      //console.error('Advert failed to load: ', error);
-    }}
+    // onAdFailedToLoad={(error) => {
+    //   alert('Error de Conexion')
+    //   //console.error('Advert failed to load: ', error);
+    // }}
   />
   );
 }

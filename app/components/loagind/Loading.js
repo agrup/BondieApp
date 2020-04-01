@@ -5,24 +5,19 @@ import {Overlay} from 'react-native-elements'
 export default function Loading (props){
     const {isVisible, text} = props;
     return (
-        <Overlay
-            isVisible = {isVisible}
-            windowsBackgroundColor = "rgba (F,F,F,.5)"
-            overlayBackgroundColor = "transparent"
-            overlayStyle = {StyleSheet.overlay}
-        >
+        
             <View style={style.view}>
                 <ActivityIndicator size = "large" color= "#FFFFFF"/>
                 {text && <Text style = {StyleSheet.text}> {text}</Text>}
                 
             </View>
-        </Overlay>
+        
     )
 }
 
 const style = StyleSheet.create({
     overlay:{
-        height: 100,
+        height: 50,
         width: 200,
         backgroundColor: "#fff",
         borderColor: "#00a680",
