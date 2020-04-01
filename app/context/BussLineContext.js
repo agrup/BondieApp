@@ -11,7 +11,7 @@ export const Provider = props => {
   // Initial values are obtained from the props
   const { children } = props;
 
-  const [busslines, setBussLines] = useState({});
+  const [busslines, setBussLines] = useState([]);
   
   async function fetchRoutes(){
     const resultBussLines = [];
@@ -21,9 +21,6 @@ export const Provider = props => {
           let bussline = doc.data();
           bussline.id = doc.id;
           resultBussLines.push(bussline);
-                      
-          //var source = doc.metadata.fromCache ? "local cache" : "server";
-          //console.log("Data came from " + source);
         })
 
     });

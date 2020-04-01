@@ -6,9 +6,10 @@ export default function Scheduler({scheduler}){
 
    const tableHead = []
    const tableroutes = []
+   
     Object.values(scheduler).forEach(function(key){
-      var {show,horas} = key
-      console.log(horas)
+      const {show,horas} = key
+
       tableHead.push(show)
       tableroutes.push(horas)
     });
